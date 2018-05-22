@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Sandbox</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="./lib/dominate.js"></script>
+    <style>
+      .classy {
+        height: 100px;
+        width: 100px;
+        border: 1px dotted red;
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+      function giphy() {
+        $l.ajax({
+          url: 'https://api.giphy.com/v1/gifs/random',
+          success: (e) => {
+            console.log(e)
+            $l('#gifme').append(`<img src="${e.data}">`)
+          }
+        })
+      }
+    </script>
+  </head>
+  <body>
+    <div id='first'>
+      <h3>I am div 1</h3>
+    </div>
+    <div class="div-two">
+      <p>I am div 2</p>
+      <ul>
+        <li>List item one</li>
+        <li><a href="#">Linked list, lol</a></li>
+        <div id='weirdo'>WEIRDO</div>
+        <li>List item three</li>
+      </ul>
+    </div>
+    <div isAnode="false" id="lonely">
+      <p>so lonely</p>
+      <ul>
+        <li>Better Not</li>
+        <li>Be Seen</li>
+      </ul>
+    </div>
+    <div id="gifme"></div>
+    <button type="button" onclick="giphy()">Click 4 Gif</button>
+  <footer>
+    The cockroach of a webpage. Still here.
+  </footer>
+  </body>
+</html>
