@@ -8,48 +8,38 @@ The functionality of the of the library includes the ability to toggle classes, 
 #### `$l(selector)`
 $l takes in a string or a function as an argument. If a string is passed in, the function will return all instances of the element into DOM nodes, which can then be used with other methods in the library to manipulate the element. If a function is passed in, they will be triggered when the HTML has finished rendering.
 
-#### `DOM Manipulation` methods
+#### DOM Manipulation methods
 ##### `html`
-* Let's write the method `html` first. It can optionally receive a
-  string as a parameter.
-* If it receives an argument, this will become the `innerHTML` (hint
-  hint) of the each of the nodes. If it does **not** receive an
-  argument, it should return the `innerHTML` of the **first** node
-  in the array.
+When this method receives an argument, the argument becomes the innerHTML of each of the nodes. If it receives no argument, the function return the innerHTML of the first node in the array.
 
 ##### `empty`
-* This method clears out the content of all nodes in the internal array. I set the
-  `html` of all nodes to an empty string.
+This clears out the content of all the selected HTML elements.
 
 ##### `append`
-* Take a look [here.][append] This method should accept either a jQuery-lite
-wrapped collection, an HTML element, or a string. Append the `outerHTML`
-of each element in the argument to the `innerHTML` of each element in the
-`DOMNodeCollection`. Don't worry about converting strings into HTML
-elements; just pass them straight through to the elements' `innerHTML`.
+This method accepts either a DOMINATE-wrapped collection, an HTML element, or a string. It inserts the argument into the innerHTML of the selected elements.
 
-##### other methods
-* I will leave it up to you to figure out ways to implement `attr`,
-  `addClass`, and `removeClass`. All the information for how to change
-  nodes is available in [this resource][htmlelement].
+##### `attr`
+When two arguments are passed, the selected elements have element attributes set on them (attributeName, value).
+##### `addClass`
+Adds a class to the selected HTML elements.
+##### `removeClass`
+Removes a class from the selected HTML elements.
 
-#### traversal
+#### Traversal methods
 ##### `children`
-* `children` is a method that should return a `DOMNodeCollection` of
-  **ALL** children of all nodes in the array.
-* Each node in the array will natively have a `children` attribute. Look
-  [here][children] for more information.
-* Make sure the return value of this method is an instance of
-  `DOMNodeCollection`.
-
+This method returns all the children in the the select elements.
 ##### `parent`
-* Return a `DOMNodeCollection` of the `parent`s of each of the nodes
-
+Returns the parent element of all the selected elements.
 ##### `find`
-* Returns a `DOMNodeCollection` of all the nodes matching the selector
-  passed in as an argument that are descendants of the nodes.
-  [This might come in handy][elementqueryselectorall].
-
+Returns all the descendants of the selected HTML element of all the nodes matching the selector
+passed in as an argument.
 ##### `remove`
-* This should `remove` the html of all the nodes in the array from the DOM
-* It should also remove all nodes from the array.
+This method removes all the selected elements.
+
+#### Event Handling
+#### `on`
+Takes in two arguments, an eventType and a callback function, and adds event handlers for all the selected elements.
+#### `off`
+Takes in an eventType and removes event handlers on all the selected elements.
+#### `ajax`
+This method receives one options object argument and uses the object to make a request.
