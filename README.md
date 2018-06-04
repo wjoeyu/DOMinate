@@ -7,7 +7,7 @@ The functionality of the of the library includes the ability to toggle classes, 
 
 [DOMinate Tic Tac Toe Live Demo](http://www.joey-wu.com/DOMinate/)
 
-![images](https://github.com/wjoeyu/DOMinate/tree/master/tictactoe/dom_ttt.gif)
+![demo_gif](https://github.com/wjoeyu/DOMinate/blob/master/tictactoe/dom_ttt.gif)
 
 #### `$l(selector)`
 $l takes in a string or a function as an argument. If a string is passed in, the function will return all instances of the element into DOM nodes, which can then be used with other methods in the library to manipulate the element. If a function is passed in, they will be triggered when the HTML has finished rendering.
