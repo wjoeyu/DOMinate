@@ -3,6 +3,7 @@ class View {
     this.$el = $el;
     this.setupBoard($el);
     this.game = game;
+    this.count = 0;
   }
 
   bindEvents() {
@@ -19,11 +20,16 @@ class View {
   makeMove($square) {
     this.game.playMove($square.data('pos'));
     if ($square.data('pos')) {
-      let colors = ['#de5127', '#a7c91c', '#fd5153', '#751f51', '#f7e275', '#0f486a'];
-      let random_color = colors[Math.floor(Math.random() * colors.length)];
+      let oColor = "rgba(255,235,59,.8)";
+      let xColor = "rgba(154, 164, 174, .7)";
+      this.count += 1;
 
       $square.append(this.game.currentPlayer);
-      $square.css("background", random_color);
+      if (this.count%2 ===0) {
+        $square.css("background", oColor);
+      } else {
+        $square.css("background", xColor);
+      }
       $square.css("box-shadow", "inset 0px 0px 10px black");
 
 
@@ -53,17 +59,6 @@ class View {
         $li.data('pos', [i,j]);
         $grid.append($li);
 
-    // const $grid = $l(document.createElement('ul'));
-    // $grid.addClass('grid');
-    // el.append($grid);
-    // console.log(el);
-    // // console.log($grid);
-    // for (var i = 0; i < 3; i++) {
-    //   for (var j = 0; j < 3; j++) {
-    //     const li = document.createElement('li');
-    //     li.dataset.pos = [i,j];
-    //     const $li = $l(li);
-    //     $grid.append($li);
       }
     }
   }

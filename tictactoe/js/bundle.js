@@ -33,6 +33,9 @@
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -60,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -81,104 +84,7 @@ module.exports = MoveError;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const View = __webpack_require__(2);
-const Game = __webpack_require__(3);
-
-$( () => {
-  // Your code here
-  const newGame = new Game();
-  const $view = $('.ttt');
-  const view = new View(newGame, $view);
-  view.bindEvents();
-
-
-
-});
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-class View {
-  constructor(game, $el) {
-    this.$el = $el;
-    this.setupBoard($el);
-    this.game = game;
-  }
-
-  bindEvents() {
-    this.$el.on('click', (e) => {
-      e.stopPropagation();
-      let $square = $(e.target);
-      // let $square = $l(e.target);
-      if(!this.game.board.isOver()) {
-        this.makeMove($square);
-      }
-    } );
-  }
-
-  makeMove($square) {
-    this.game.playMove($square.data('pos'));
-    if ($square.data('pos')) {
-      let colors = ['#de5127', '#a7c91c', '#fd5153', '#751f51', '#f7e275', '#0f486a'];
-      let random_color = colors[Math.floor(Math.random() * colors.length)];
-
-      $square.append(this.game.currentPlayer);
-      $square.css("background", random_color);
-      $square.css("box-shadow", "inset 0px 0px 10px black");
-
-
-    }
-
-    if (this.game.board.isOver()) {
-      // alert("You won!");
-      if(!this.game.winner()) {
-        $('congrats').append(`no one has won`);
-        // $l('congrats').append(`no one has won`);
-
-      }
-      else {
-        $('congrats').append(`${this.game.currentPlayer} has won!`);
-        // $l('congrats').append(`${this.game.currentPlayer} has won!`);
-
-      }
-    }
-  }
-
-  setupBoard(el) {
-    const $grid = $("<ul class='grid'></ul>");
-    el.append($grid);
-    for (var i = 0; i < 3; i++) {
-      for (var j = 0; j < 3; j++) {
-        const $li = $('<li>');
-        $li.data('pos', [i,j]);
-        $grid.append($li);
-
-    // const $grid = $l(document.createElement('ul'));
-    // $grid.addClass('grid');
-    // el.append($grid);
-    // console.log(el);
-    // // console.log($grid);
-    // for (var i = 0; i < 3; i++) {
-    //   for (var j = 0; j < 3; j++) {
-    //     const li = document.createElement('li');
-    //     li.dataset.pos = [i,j];
-    //     const $li = $l(li);
-    //     $grid.append($li);
-      }
-    }
-  }
-}
-
-module.exports = View;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const Board = __webpack_require__(4);
+const Board = __webpack_require__(3);
 const MoveError = __webpack_require__(0);
 
 class Game {
@@ -255,7 +161,80 @@ module.exports = Game;
 
 
 /***/ }),
-/* 4 */
+/* 2 */
+/***/ (function(module, exports) {
+
+class View {
+  constructor(game, $el) {
+    this.$el = $el;
+    this.setupBoard($el);
+    this.game = game;
+    this.count = 0;
+  }
+
+  bindEvents() {
+    this.$el.on('click', (e) => {
+      e.stopPropagation();
+      let $square = $(e.target);
+      // let $square = $l(e.target);
+      if(!this.game.board.isOver()) {
+        this.makeMove($square);
+      }
+    } );
+  }
+
+  makeMove($square) {
+    this.game.playMove($square.data('pos'));
+    if ($square.data('pos')) {
+      let oColor = "rgba(255,235,59,.8)";
+      let xColor = "rgba(154, 164, 174, .7)";
+      this.count += 1;
+
+      $square.append(this.game.currentPlayer);
+      if (this.count%2 ===0) {
+        $square.css("background", oColor);
+      } else {
+        $square.css("background", xColor);
+      }
+      $square.css("box-shadow", "inset 0px 0px 10px black");
+
+
+    }
+
+    if (this.game.board.isOver()) {
+      // alert("You won!");
+      if(!this.game.winner()) {
+        $('congrats').append(`no one has won`);
+        // $l('congrats').append(`no one has won`);
+
+      }
+      else {
+        $('congrats').append(`${this.game.currentPlayer} has won!`);
+        // $l('congrats').append(`${this.game.currentPlayer} has won!`);
+
+      }
+    }
+  }
+
+  setupBoard(el) {
+    const $grid = $("<ul class='grid'></ul>");
+    el.append($grid);
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        const $li = $('<li>');
+        $li.data('pos', [i,j]);
+        $grid.append($li);
+
+      }
+    }
+  }
+}
+
+module.exports = View;
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 const MoveError = __webpack_require__(0);
@@ -382,6 +361,25 @@ class Board {
 Board.marks = ['x', 'o'];
 
 module.exports = Board;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const View = __webpack_require__(2);
+const Game = __webpack_require__(1);
+
+$( () => {
+  // Your code here
+  const newGame = new Game();
+  const $view = $('.ttt');
+  const view = new View(newGame, $view);
+  view.bindEvents();
+
+
+
+});
 
 
 /***/ })
