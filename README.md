@@ -5,6 +5,10 @@ The library is demonstrated here with a tictactoe game that utilizes a design in
 
 The functionality of the of the library includes the ability to toggle classes, add, edit, and remove HTML contents and entire elements, find child/parent elements, handle events, and make AJAX requests.
 
+[DOMinate Tic Tac Toe Live Demo](http://www.joey-wu.com/DOMinate/)
+
+![images](https://github.com/wjoeyu/DOMinate/tree/master/tictactoe/dom_ttt.gif)
+
 #### `$l(selector)`
 $l takes in a string or a function as an argument. If a string is passed in, the function will return all instances of the element into DOM nodes, which can then be used with other methods in the library to manipulate the element. If a function is passed in, they will be triggered when the HTML has finished rendering.
 
