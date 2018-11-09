@@ -10,7 +10,7 @@ class Board {
       throw new MoveError('Is not valid position!');
     }
 
-    return (this.grid[pos[0]][pos[1]] === null);
+    return (this.grid[parseInt(pos[0])][parseInt(pos[1])] === null);
   }
 
   isOver() {
@@ -34,7 +34,7 @@ class Board {
       throw new MoveError('Is not an empty position!');
     }
 
-    this.grid[pos[0]][pos[1]] = mark;
+    this.grid[parseInt(pos[0])][parseInt(pos[1])] = mark;
   }
 
   print() {
@@ -99,10 +99,11 @@ class Board {
   }
 
   static isValidPos(pos) {
-    return (0 <= pos[0]) &&
-    (pos[0] < 3) &&
-    (0 <= pos[1]) &&
-    (pos[1] < 3);
+    // console.log(`isValidPos: ${pos}`);
+    return (0 <= parseInt(pos[0])) &&
+    (parseInt(pos[0]) < 3) &&
+    (0 <= parseInt(pos[1])) &&
+    (parseInt(pos[1]) < 3);
   }
 
   static makeGrid() {

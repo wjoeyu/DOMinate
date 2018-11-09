@@ -4,7 +4,7 @@ const MoveError = require("./moveError");
 class Game {
   constructor() {
     this.board = new Board();
-    this.currentPlayer = Board.marks[0];
+    this.currentPlayer = Board.marks[1];
   }
 
   isOver() {
